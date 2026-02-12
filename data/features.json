@@ -1,0 +1,18 @@
+[
+  {
+    "title": "集成",
+    "description": "本站为非官方性质的、由丰川祥子粉丝建立的祥子相关信息集合站点。本网站**不会**于本次生日企划结束后关闭。将继续存在并扩大升级。",
+    "icon": "bi bi-box"
+  },
+  {
+    "title": "速报",
+    "description": "截至2026年2月12日，丰川祥子生日企划全国大屏项目已于全国超过300处大屏公开投放。您可于本站的“寻访地图”板块进一步查看具体位置。",
+    "icon": "bi bi-lightning-charge"
+  },
+  {
+    "title": "Github",
+    "description": "本网页基于 GitHub Pages 和 Hugo 搭建，欢迎访问我们的 GitHub仓库以及技术合作。",
+    "link": "https://github.com/Sakichan0214/Sakichan0214.github.io",
+    "icon": "bi bi-github"
+  }
+]
