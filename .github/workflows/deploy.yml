@@ -2,8 +2,8 @@ name: Deploy Hugo Site to Pages
 
 on:
   push:
-    branches: ["main"]   # 代码推送至 main 分支时触发
-  workflow_dispatch:     # 支持手动触发
+    branches: ["main"]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -21,8 +21,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 自动拉取主题子模块
+          submodules: recursive
           fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm ci || npm install
+          # 强制安装 @parcel/watcher（可选依赖经常下载失败）
+          npm install @parcel/watcher --no-save --force
 
       - name: Fix tailwindcss permissions
         run: chmod +x node_modules/.bin/tailwindcss
@@ -31,15 +43,15 @@ jobs:
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: 'latest'
-          extended: true       # 若主题需扩展版，取消注释
+          extended: true
 
       - name: Build with Hugo
-        run: hugo --minify --gc   # 生成优化后的静态文件
+        run: hugo --minify --gc
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public          # 上传生成的站点文件
+          path: ./public
 
   deploy:
     environment:
@@ -51,5 +63,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-
