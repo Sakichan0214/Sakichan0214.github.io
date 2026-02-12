@@ -25,17 +25,17 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+     uses: actions/setup-node@v4
+      with:
+    node-version: '20'
 
-      - name: Install dependencies
-        run: |
-          npm ci || npm install
-          # 强制安装 @parcel/watcher（可选依赖经常下载失败）
-          npm install @parcel/watcher --no-save --force
-
-      - name: Fix tailwindcss permissions
+     - name: Install dependencies
+       run: 
+        npm install --ignore-scripts=false --force
+        npm install @parcel/watcher lightningcss --force --no-save
+        npm rebuild   # 强制重新编译原生模块
+          
+     - name: Fix tailwindcss permissions
         run: chmod +x node_modules/.bin/tailwindcss
 
       - name: Setup Hugo
