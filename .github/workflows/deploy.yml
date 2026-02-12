@@ -24,6 +24,9 @@ jobs:
           submodules: recursive  # 自动拉取主题子模块
           fetch-depth: 0
 
+      - name: Fix tailwindcss permissions
+        run: chmod +x node_modules/.bin/tailwindcss
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
